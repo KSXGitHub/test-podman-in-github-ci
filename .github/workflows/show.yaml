@@ -18,13 +18,14 @@ jobs:
         run: sudo apt update -y
 
       - name: Install podman
+        if: false
         run: sudo apt install -y podman
 
       - name: 'Build image: ubuntu'
-        run: podman build . --file ubuntu-with-updated-packages.Dockerfile
+        run: docker build . --file ubuntu-with-updated-packages.Dockerfile
 
       - name: 'Build image: cowsay'
-        run: podman build . --file cowsay.Dockerfile --tag cowsay:latest
+        run: docker build . --file cowsay.Dockerfile --tag cowsay:latest
 
       - name: Cow greets
-        run: podman run --rm cowsay:latest cowsay 'Hello from GitHub Workflows'
+        run: docker run --rm cowsay:latest cowsay 'Hello from GitHub Workflows'
