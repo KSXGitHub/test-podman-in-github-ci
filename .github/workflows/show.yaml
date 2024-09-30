@@ -20,8 +20,11 @@ jobs:
       - name: Install podman
         run: sudo apt install -y podman
 
-      - name: Build image
-        run: podman build . --tag cowsay:latest
+      - name: 'Build image: ubuntu'
+        run: podman build . --file ubuntu-with-updated-packages.Dockerfile
+
+      - name: 'Build image: cowsay'
+        run: podman build . --file cowsay.Dockerfile --tag cowsay:latest
 
       - name: Cow greets
         run: podman run --rm cowsay:latest cowsay 'Hello from GitHub Workflows'
